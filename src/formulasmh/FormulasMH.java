@@ -21,6 +21,8 @@ public class FormulasMH {
         Configurador config = new Configurador(args[0]);
 
         for (int i = 0; i < config.getFunciones().size(); i++) {
+            
+            //HOLAAAAAA
             //CountDownLatch cdl = new CountDownLatch(config.getSemillas().size());
             switch (config.getFunciones().get(i)) {
                 case "AckleyFunction":
