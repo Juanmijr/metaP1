@@ -19,7 +19,7 @@ public class Configurador {
     ArrayList<Long> semillas;
     ArrayList<Double> rangos;
     ArrayList<Double> optimos;
-    Double dimension;
+    int dimension;
 
     public Configurador(String ruta) {
         funciones = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Configurador {
                         }
                         break;
                     case "Dimensión":
-                        dimension = Double.parseDouble(split[1]);
+                        dimension = Integer.parseInt(split[1]);
                         break;
                     case "Óptimos":
                          String[] vOptimo = split[1].split(" ");
@@ -80,7 +80,7 @@ public class Configurador {
         return semillas;
     }
 
-    public Double getDimension() {
+    public int getDimension() {
         return dimension;
     }
 
