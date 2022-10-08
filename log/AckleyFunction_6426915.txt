@@ -1,0 +1,3 @@
+Resultado mejora BL3: 21.562212325095484
+Resultado mejora blk: 21.5691663796188
+Resultado Ackley sin mejora: 21.813969713225653

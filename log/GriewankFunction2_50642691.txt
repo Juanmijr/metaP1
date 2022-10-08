@@ -1,0 +1,1 @@
+Resultado mejora BL3: 0.08132853252152483Resultado mejora blk: -0.030458782825517505Resultado GriewankFunction2 sin mejora: 0.08132853252152483
