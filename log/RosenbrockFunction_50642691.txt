@@ -1,1 +1,0 @@
-Resultado mejora BL3: 3.8608859994463027E21Resultado mejora blk: 3.69148042069212E21Resultado RosenbrockFunction: 3.8608859994463027E21
