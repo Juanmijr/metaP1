@@ -1,3 +1,0 @@
-RangoMax=32768
-RangoMin=-32768
-OptimoGlobal=0

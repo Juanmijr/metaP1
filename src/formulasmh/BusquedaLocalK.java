@@ -13,7 +13,7 @@ public class BusquedaLocalK {
     public BusquedaLocalK() {
     }
 
-    public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, double rangoMin, double rangoMax, Formula fi) {
+    public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, double rangoMin, double rangoMax, Formula fi, StringBuilder sb) {
         long tiempoinicial = System.currentTimeMillis();
         double[] solVecina = new double[tam];
         double[] mejorVecina = new double[tam];
@@ -50,7 +50,7 @@ public class BusquedaLocalK {
 
                 }
                 double costeVecino = fi.ejecucion(solVecina);
-                if (costeVecino < mejorVeci) {
+                if (Math.abs(costeVecino) < Math.abs(mejorVeci)) {
                     mejorVeci = costeVecino;
                     mejorVecina = solVecina;
 
@@ -58,7 +58,7 @@ public class BusquedaLocalK {
 
             }
 
-            if (mejorVeci < mejorCoste) {
+            if (Math.abs(mejorVeci) < Math.abs(mejorCoste)) {
                 solActual = mejorVecina;
                 mejorCoste = mejorVeci;
                 mejora = true;
@@ -66,7 +66,14 @@ public class BusquedaLocalK {
             }
 
         } while (it < evaluaciones && mejora);
-        long tiempofin = System.currentTimeMillis();
+        if (evalK){
+                     sb.append("Resultado mejora blk: " + (mejorCoste) + "\n");
+        }
+        else{
+            sb.append("Resultado mejora bl3: "+mejorCoste+"\n");
+        }
+        long tiempofin = System.nanoTime();
+        sb.append("Duracion " + (tiempofin - tiempoinicial)+ " nanosegundos\n");
 
         return mejorCoste;
     }
