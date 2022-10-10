@@ -1,0 +1,5 @@
+Resultado mejora BL3: 607.1919784032564
+Duracion 79100 milisegundos
+Resultado mejora blk: 359.8754751046598
+Duracion 191600 milisegundos
+Resultado GriewankFunction sin mejora: 1015.9766891433887

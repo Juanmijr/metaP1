@@ -1,0 +1,5 @@
+Resultado mejora BL3: 3.0581407783767934E9
+Duracion 72500 milisegundos
+Resultado mejora blk: 2.05142823467635E9
+Duracion 157500 milisegundos
+Resultado DixonPrice: 3.0581407783767934E9

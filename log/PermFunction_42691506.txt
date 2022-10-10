@@ -1,0 +1,5 @@
+Resultado mejora BL3: 2.8653243484337333E63
+Duracion 229300 milisegundos
+Resultado mejora blk: 7.305228651938552E63
+Duracion 387800 milisegundos
+Resultado PermFunction: 1.4636097478373025E65

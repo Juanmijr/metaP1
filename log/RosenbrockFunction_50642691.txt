@@ -1,0 +1,5 @@
+Resultado mejora BL3: 3.8608859994463027E21
+Duracion 39400 milisegundos
+Resultado mejora blk: 3.69148042069212E21
+Duracion 69500 milisegundos
+Resultado RosenbrockFunction: 3.8608859994463027E21

@@ -14,7 +14,7 @@ public class BusquedaLocal {
 
     public double busquedaMejor(int tam, double numVecinos, int evaluaciones, 
             double[] solActual, double rangoMin, double rangoMax, Formula fi, StringBuilder sb) {
-        long tiempoinicial = System.currentTimeMillis();
+        long tiempoinicial = System.nanoTime();
         double[] solVecina = new double[tam];
         double[] mejorVecina = new double[tam];
         int it = 0;
@@ -61,8 +61,8 @@ public class BusquedaLocal {
 
         } while (it < evaluaciones && mejora);
         sb.append("Resultado mejora BL3: " + mejorCoste + "\n");
-        long tiempofin = System.currentTimeMillis();
-        sb.append("Duracion " + (tiempofin - tiempoinicial)/1000+ " segundos\n");
+        long tiempofin = System.nanoTime();
+        sb.append("Duracion " + (tiempofin - tiempoinicial)+ " milisegundos\n");
         return mejorCoste;
     }
 

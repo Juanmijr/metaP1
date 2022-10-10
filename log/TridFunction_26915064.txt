@@ -1,0 +1,5 @@
+Resultado mejora BL3: 2526948.184098751
+Duracion 65700 milisegundos
+Resultado mejora blk: 2405396.0070602703
+Duracion 88100 milisegundos
+Resultado TridFunction: 2597846.9517287216

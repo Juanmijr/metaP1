@@ -1,0 +1,5 @@
+Resultado mejora BL3: 7853.521081651032
+Duracion 135200 milisegundos
+Resultado mejora blk: 7626.000031518841
+Duracion 165600 milisegundos
+Resultado RotatedHypeEllipsoid: 7853.521081651032

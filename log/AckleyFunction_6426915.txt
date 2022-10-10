@@ -1,0 +1,5 @@
+Resultado mejora BL3: 21.562212325095484
+Duracion 120100 milisegundos
+Resultado mejora blk: 21.5691663796188
+Duracion 84200 milisegundos
+Resultado Ackley sin mejora: 21.813969713225653
