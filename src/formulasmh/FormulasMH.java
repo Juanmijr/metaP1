@@ -20,7 +20,6 @@ public class FormulasMH {
      */
     public static void main(String[] args) {
         Configurador config = new Configurador(args[0]);
-        BusquedaLocal bl3 = new BusquedaLocal();
         BusquedaLocalK blk = new BusquedaLocalK();
         StringBuilder sb = null;
         for (int i = 0; i < config.getFunciones().size(); i++) {
@@ -32,9 +31,9 @@ public class FormulasMH {
                         AckleyFunction ac = new AckleyFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(0), config.getRangos().get(1), config.getOptimos().get(0));
                         double vector[] = ac.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(0), config.getRangos().get(1), ac) + "\n");
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(),true, 1000,
                                 vector, config.getRangos().get(0), config.getRangos().get(1), ac) + "\n");
                         sb.append("Resultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -46,9 +45,9 @@ public class FormulasMH {
                         GriewankFunction gf = new GriewankFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(2), config.getRangos().get(3), config.getOptimos().get(1));
                         double vector[] = gf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(2), config.getRangos().get(3), gf) + "\n");
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), true,1000,
                                 vector, config.getRangos().get(2), config.getRangos().get(3), gf));
                         sb.append("Resultado GriewankFunction sin mejora: " + gf.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -61,9 +60,9 @@ public class FormulasMH {
                         GriewankFunction2 gf2 = new GriewankFunction2(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(4), config.getRangos().get(5), config.getOptimos().get(2));
                         double vector[] = gf2.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(4), config.getRangos().get(5), gf2));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), true,1000,
                                 vector, config.getRangos().get(4), config.getRangos().get(5), gf2));
                         sb.append("Resultado GriewankFunction2 sin mejora: " + gf2.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -75,9 +74,9 @@ public class FormulasMH {
                         PermFunction pf = new PermFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(6), config.getRangos().get(7), config.getOptimos().get(2));
                         double vector[] = pf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(6), config.getRangos().get(7), pf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), true,1000,
                                 vector, config.getRangos().get(6), config.getRangos().get(7), pf));
                         sb.append("Resultado PermFunction: " + pf.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -89,9 +88,9 @@ public class FormulasMH {
                         RastringinFunction rf = new RastringinFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(8), config.getRangos().get(9), config.getOptimos().get(3));
                         double vector[] = rf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(8), config.getRangos().get(9), rf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(),true ,1000,
                                 vector, config.getRangos().get(8), config.getRangos().get(9), rf));
                         sb.append("Resultado RastringinFunction sin mejora: " + rf.ejecucion(vector));
                                                 guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -104,9 +103,9 @@ public class FormulasMH {
                         RosenbrockFunction rf = new RosenbrockFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(10), config.getRangos().get(11), config.getOptimos().get(4));
                         double vector[] = rf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(10), config.getRangos().get(11), rf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(),true, 1000,
                                 vector, config.getRangos().get(11), config.getRangos().get(11), rf));
                         sb.append("Resultado RosenbrockFunction: " + rf.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -119,9 +118,9 @@ public class FormulasMH {
                         RotatedHypeEllipsoid gf = new RotatedHypeEllipsoid(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(12), config.getRangos().get(13), config.getOptimos().get(5));
                         double vector[] = gf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(),false, 1000,
                                 vector, config.getRangos().get(12), config.getRangos().get(13), gf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), true,1000,
                                 vector, config.getRangos().get(12), config.getRangos().get(13), gf));
                         sb.append("Resultado RotatedHypeEllipsoid: " + gf.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -134,9 +133,9 @@ public class FormulasMH {
                         SchewefelFunction sf = new SchewefelFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(14), config.getRangos().get(15), config.getOptimos().get(6));
                         double vector[] = sf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(),false, 1000,
                                 vector, config.getRangos().get(14), config.getRangos().get(15), sf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(),true, 1000,
                                 vector, config.getRangos().get(14), config.getRangos().get(15), sf));
                         sb.append("Resultado Schewefel: " + sf.ejecucion(vector));
                                                 guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -149,9 +148,9 @@ public class FormulasMH {
                         TridFunction tf = new TridFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(16), config.getRangos().get(17), config.getOptimos().get(7));
                         double vector[] = tf.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(16), config.getRangos().get(17), tf));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(),true, 1000,
                                 vector, config.getRangos().get(16), config.getRangos().get(17), tf));
                         sb.append("Resultado TridFunction: " + tf.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -164,9 +163,9 @@ public class FormulasMH {
                         DixonPriceFunction df = new DixonPriceFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(18), config.getRangos().get(19), config.getOptimos().get(8));
                         double vector[] = df.vectorAleatorios();
-                        sb.append("Resultado mejora BL3: " + bl3.busquedaMejor(config.getDimension(), 3, 1000,
+                        sb.append("Resultado mejora BL3: " + blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, config.getRangos().get(18), config.getRangos().get(19), df));
-                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
+                        sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), true,1000,
                                 vector, config.getRangos().get(18), config.getRangos().get(19), df));
                         sb.append("Resultado DixonPrice: " + df.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());

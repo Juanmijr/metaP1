@@ -21,7 +21,6 @@ public class AckleyFunction extends Formula {
             double a = 20;
             double b = 0.2;
             double c = 2 * Math.PI;
-            double optimo = -1000;
             double resul = 0;
             double p1 = 0;
             double p2 = 0;

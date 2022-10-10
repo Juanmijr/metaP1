@@ -13,16 +13,23 @@ public class BusquedaLocalK {
     public BusquedaLocalK() {
     }
 
-    public double busquedaMejor(int tam, double evaluaciones, double[] solActual, double rangoMin, double rangoMax, Formula fi) {
+    public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, double rangoMin, double rangoMax, Formula fi) {
+        long tiempoinicial = System.currentTimeMillis();
         double[] solVecina = new double[tam];
         double[] mejorVecina = new double[tam];
         int it = 0;
         double mejorCoste = fi.ejecucion(solActual);
         double mejorVeci = Double.POSITIVE_INFINITY;
         boolean mejora;
+        double numVecinos = 0;
         do {
             mejora = false;
-            double numVecinos = fi.numAleatorio(4, 10);
+            if (evalK) {
+                numVecinos = fi.numAleatorio(4, 10);
+
+            } else {
+                numVecinos = 3;
+            }
             for (int i = 1; i < numVecinos; i++) {
                 for (int j = 0; j < tam; j++) {
 
@@ -59,6 +66,8 @@ public class BusquedaLocalK {
             }
 
         } while (it < evaluaciones && mejora);
+        long tiempofin = System.currentTimeMillis();
+
         return mejorCoste;
     }
 
