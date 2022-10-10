@@ -6,6 +6,7 @@ package formulasmh;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
 import java.io.PrintWriter;
 
 /**
@@ -93,6 +94,8 @@ public class FormulasMH {
                         sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
                                 vector, config.getRangos().get(8), config.getRangos().get(9), rf));
                         sb.append("Resultado RastringinFunction sin mejora: " + rf.ejecucion(vector));
+                                                guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
+
                     }
                     break;
                 case "RosenbrockFunction":
@@ -136,6 +139,8 @@ public class FormulasMH {
                         sb.append("Resultado mejora blk: " + blk.busquedaMejor(config.getDimension(), 1000,
                                 vector, config.getRangos().get(14), config.getRangos().get(15), sf));
                         sb.append("Resultado Schewefel: " + sf.ejecucion(vector));
+                                                guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
+
                     }
                     break;
                 case "TridFunction":
@@ -177,6 +182,8 @@ public class FormulasMH {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
+            File directorio=new File("log");
+            directorio.mkdir();
             fichero = new FileWriter(ruta);
             pw = new PrintWriter(fichero);
 
