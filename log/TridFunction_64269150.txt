@@ -1,5 +1,5 @@
 Resultado mejora BL3: 3306024.8925039023
-Duracion 88000 milisegundos
+Duracion 89000 milisegundos
 Resultado mejora blk: 2761720.6615286693
-Duracion 141500 milisegundos
+Duracion 125600 milisegundos
 Resultado TridFunction: 3306024.8925039023

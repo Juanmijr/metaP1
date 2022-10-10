@@ -1,0 +1,5 @@
+Resultado mejora BL3: 4159.701217416926
+Duracion 93500 milisegundos
+Resultado mejora blk: 4153.741901182613
+Duracion 89900 milisegundos
+Resultado Schewefel: 4162.651943865999

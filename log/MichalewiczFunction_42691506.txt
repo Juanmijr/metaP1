@@ -1,0 +1,5 @@
+Resultado mejora BL3: -2.3705977235389746
+Duracion 106500 milisegundos
+Resultado mejora blk: -2.7812001089365777
+Duracion 112400 milisegundos
+Resultado MichalewiczFunction sin mejora: -1.2455808693888426

@@ -1,6 +1,6 @@
 Rangos=-32768 32768 -1000 1000 -51.12 51.12 -5000 5000 -100 100 -65536 65536 -5 10 0 6.283185 -1000 1000 -100 100
 Semillas=50642691 06426915 64269150 42691506 26915064
-Funciones=AckleyFunction GriewankFunction GriewankFunction2 PermFunction RastringinFunction RosenbrockFunction RotatedHypeEllipsoid SchewefelFunction TridFunction DixonPriceFunction 
+Funciones=AckleyFunction GriewankFunction MichalewiczFunction PermFunction RastringinFunction RosenbrockFunction RotatedHypeEllipsoid SchewefelFunction TridFunction DixonPriceFunction 
 Dimensión=10
 Óptimos=0 0 0 0 0 0 0 -9.66015 -210 0
 Iteraciones=1000

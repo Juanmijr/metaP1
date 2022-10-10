@@ -55,17 +55,17 @@ public class FormulasMH {
 
                     }
                     break;
-                case "GriewankFunction2":
+                case "MichalewiczFunction":
                     for (int k = 0; k < config.getSemillas().size(); k++) {
                         sb = new StringBuilder();
-                        GriewankFunction2 gf2 = new GriewankFunction2(config.getSemillas().get(k), config.getDimension(),
+                        MichalewiczFunction gf2 = new MichalewiczFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(4), config.getRangos().get(5), config.getOptimos().get(2));
                         double vector[] = gf2.vectorAleatorios();
                         bl3.busquedaMejor(config.getDimension(), 3, config.getIteraciones().get(0),
                                 vector, config.getRangos().get(4), config.getRangos().get(5), gf2, sb);
                         blk.busquedaMejor(config.getDimension(), config.getIteraciones().get(0),
                                 vector, config.getRangos().get(4), config.getRangos().get(5), gf2, sb);
-                        sb.append("Resultado GriewankFunction2 sin mejora: " + gf2.ejecucion(vector));
+                        sb.append("Resultado MichalewiczFunction sin mejora: " + gf2.ejecucion(vector));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
@@ -94,6 +94,7 @@ public class FormulasMH {
                          blk.busquedaMejor(config.getDimension(), config.getIteraciones().get(0),
                                 vector, config.getRangos().get(8), config.getRangos().get(9), rf, sb);
                         sb.append("Resultado RastringinFunction sin mejora: " + rf.ejecucion(vector));
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
                 case "RosenbrockFunction":
@@ -137,6 +138,7 @@ public class FormulasMH {
                         blk.busquedaMejor(config.getDimension(), config.getIteraciones().get(0),
                                 vector, config.getRangos().get(14), config.getRangos().get(15), sf, sb);
                         sb.append("Resultado Schewefel: " + sf.ejecucion(vector));
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
                 case "TridFunction":

@@ -8,9 +8,9 @@ package formulasmh;
  *
  * @author JuanMi
  */
-public class GriewankFunction2 extends Formula{
+public class MichalewiczFunction extends Formula{
 
-    public GriewankFunction2(long semilla, double dimension, double rangoMin, double rangoMax, double optimoGlobal) {
+    public MichalewiczFunction(long semilla, double dimension, double rangoMin, double rangoMax, double optimoGlobal) {
         super( semilla, dimension, rangoMin, rangoMax, optimoGlobal);
     }
 

@@ -1,5 +1,5 @@
 Resultado mejora BL3: 8.628317346710909E67
-Duracion 998700 milisegundos
+Duracion 245000 milisegundos
 Resultado mejora blk: 2.0114318965009616E67
-Duracion 828600 milisegundos
+Duracion 758600 milisegundos
 Resultado PermFunction: 8.628320556490046E67

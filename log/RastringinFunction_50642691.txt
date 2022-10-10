@@ -1,0 +1,5 @@
+Resultado mejora BL3: 40581.85359982749
+Duracion 92600 milisegundos
+Resultado mejora blk: 39504.586704595946
+Duracion 69500 milisegundos
+Resultado RastringinFunction sin mejora: 40581.85359982749
