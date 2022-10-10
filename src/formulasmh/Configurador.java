@@ -19,6 +19,7 @@ public class Configurador {
     ArrayList<Long> semillas;
     ArrayList<Double> rangos;
     ArrayList<Double> optimos;
+    ArrayList<Integer> iteraciones;
     int dimension;
 
     public Configurador(String ruta) {
@@ -26,6 +27,7 @@ public class Configurador {
         semillas = new ArrayList<>();
         rangos = new ArrayList<>();
         optimos = new ArrayList<>();
+        iteraciones = new ArrayList<>();
         String linea;
         FileReader f = null;
         try {
@@ -62,6 +64,11 @@ public class Configurador {
                             optimos.add(Double.parseDouble(vOptimo[i]));
                         }
                         break;
+                    case "Iteraciones":
+                        String[] vIteraciones = split[1].split(" ");
+                        for (int i = 0; i < vIteraciones.length; i++) {
+                            iteraciones.add(Integer.parseInt(vIteraciones[i]));
+                        }
                 }
             }
 
@@ -90,6 +97,9 @@ public class Configurador {
 
     public ArrayList<Double> getOptimos() {
         return optimos;
+    }
+    public ArrayList<Integer> getIteraciones() {
+        return iteraciones;
     }
     
     

@@ -31,7 +31,6 @@ public class AckleyFunction extends Formula {
                 p2 += Math.cos(c * vector[i - 1]);
             }
             resul = -a * Math.exp(-b * Math.sqrt(p1 / dim)) - Math.exp(p2 / dim) + a + Math.exp(1);
-
             return resul;
         }
 

@@ -3,3 +3,4 @@ Semillas=50642691 06426915 64269150 42691506 26915064
 Funciones=AckleyFunction GriewankFunction GriewankFunction2 PermFunction RastringinFunction RosenbrockFunction RotatedHypeEllipsoid SchewefelFunction TridFunction DixonPriceFunction 
 Dimensión=10
 Óptimos=0 0 0 0 0 0 0 -9.66015 -210 0
+Iteraciones=1000
