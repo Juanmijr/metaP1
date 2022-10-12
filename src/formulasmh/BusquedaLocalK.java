@@ -12,9 +12,17 @@ public class BusquedaLocalK {
 
     public BusquedaLocalK() {
     }
+    void imprimeSol (StringBuilder sb, double[] solActual){
+        sb.append("Impresión SOLACTUAL:");
+        for (int i = 0 ; i<solActual.length;i++){
+            sb.append(" Elemento "+(i+1+" : " + solActual[i]));
+        }
+    }
 
     public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, double rangoMin, double rangoMax, Formula fi, StringBuilder sb) {
-        long tiempoinicial = System.currentTimeMillis();
+        sb.append("\n*** Empieza busquedaMejor del algoritmo: "+ fi.getClass()+ " ***\n");
+        imprimeSol(sb, solActual);
+        long tiempoinicial = System.nanoTime();
         double[] solVecina = new double[tam];
         double[] mejorVecina = new double[tam];
         int it = 0;
@@ -59,10 +67,14 @@ public class BusquedaLocalK {
             }
 
             if (Math.abs(mejorVeci) < Math.abs(mejorCoste)) {
+                sb.append("\nITERACIÓN: "+ it + " - \n");
+                sb.append("El mejor vecino pasa de ser: "+ mejorVeci + " a ser: "+mejorCoste+"\n");
+                imprimeSol(sb, solActual);
                 solActual = mejorVecina;
                 mejorCoste = mejorVeci;
                 mejora = true;
                 it++;
+                
             }
 
         } while (it < evaluaciones && mejora);
@@ -73,7 +85,7 @@ public class BusquedaLocalK {
             sb.append("Resultado mejora bl3: "+mejorCoste+"\n");
         }
         long tiempofin = System.nanoTime();
-        sb.append("Duracion " + (tiempofin - tiempoinicial)+ " nanosegundos\n");
+        sb.append("Duracion " + (tiempofin - tiempoinicial)/1000+ " microsegundos\n");
 
         return mejorCoste;
     }
