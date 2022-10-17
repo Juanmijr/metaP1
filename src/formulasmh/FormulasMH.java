@@ -21,21 +21,29 @@ public class FormulasMH {
     public static void main(String[] args) {
         Configurador config = new Configurador(args[0]);
         BusquedaLocalK blk = new BusquedaLocalK();
+        BusquedaTabu bt = new BusquedaTabu();
         StringBuilder sb = null;
+        double rangoMin = 0;
+        double rangoMax = 0;
         for (int i = 0; i < config.getFunciones().size(); i++) {
 
             switch (config.getFunciones().get(i)) {
                 case "AckleyFunction":
+                    rangoMax = config.getRangos().get(1);
+                    rangoMin = config.getRangos().get(0);
                     for (int k = 0; k < config.getSemillas().size(); k++) {
                         sb = new StringBuilder();
+                        
+                        
                         AckleyFunction ac = new AckleyFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(0), config.getRangos().get(1), config.getOptimos().get(0));
                         double vector[] = ac.vectorAleatorios();
                         sb.append("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         blk.busquedaMejor(config.getDimension(), false, 1000,
-                                vector, config.getRangos().get(0), config.getRangos().get(1), ac, sb);
+                                vector, rangoMin, rangoMax, ac, sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
-                                vector, config.getRangos().get(0), config.getRangos().get(1), ac, sb);
+                                vector, rangoMin, rangoMax, ac, sb);
+                        System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, rangoMin, rangoMax, 5, ac, 10));
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
