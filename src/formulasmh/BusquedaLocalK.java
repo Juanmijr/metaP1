@@ -68,7 +68,7 @@ public class BusquedaLocalK {
 
             if (Math.abs(mejorVeci) < Math.abs(mejorCoste)) {
                 sb.append("\nITERACIÓN: "+ it + " - \n");
-                sb.append("El mejor vecino pasa de ser: "+ mejorVeci + " a ser: "+mejorCoste+"\n");
+                sb.append("El mejor vecino pasa de ser: "+ mejorCoste + " a ser: "+mejorVeci+"\n");
                 imprimeSol(sb, solActual);
                 solActual = mejorVecina;
                 mejorCoste = mejorVeci;
@@ -79,10 +79,10 @@ public class BusquedaLocalK {
 
         } while (it < evaluaciones && mejora);
         if (evalK){
-                     sb.append("Resultado mejora blk: " + (mejorCoste) + "\n");
+                     sb.append("\nResultado mejora blk: " + (mejorCoste) + "\n");
         }
         else{
-            sb.append("Resultado mejora bl3: "+mejorCoste+"\n");
+            sb.append("\nResultado mejora bl3: "+mejorCoste+"\n");
         }
         long tiempofin = System.nanoTime();
         sb.append("Duracion " + (tiempofin - tiempoinicial)/1000+ " microsegundos\n");
