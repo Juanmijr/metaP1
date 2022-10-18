@@ -22,9 +22,9 @@ public class GriewankFunction extends Formula {
 
         double p1=0;
         double p2=1;
-        for (int i = 1; i <= getDimension(); i++) {
-            p1 += ((Math.pow(numAleatorio(getRangoMin(),getRangoMax()),2))/4000);
-            p2 *= Math.cos((numAleatorio(getRangoMin(), getRangoMax()))/Math.sqrt(i));
+        for (int i = 0; i <getDimension(); i++) {
+            p1 += (Math.pow(vector[i],2)/4000);
+            p2 *= Math.cos((vector[i])/Math.sqrt(i+1));
         }
 
         return p1 - p2 + 1;

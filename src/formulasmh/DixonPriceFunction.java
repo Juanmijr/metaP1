@@ -24,7 +24,7 @@ public class DixonPriceFunction extends Formula{
         for (int i = 1; i<getDimension();i++){
             double xi = vector[i];
             double xold = vector[i-1];
-            double nuevo = i*Math.pow(2*Math.pow(xi, 2)-xold,2);
+            double nuevo = i*Math.pow(Math.pow(2*xi, 2)-xold,2);
             sum = sum + nuevo;
         }
         return term1+sum;

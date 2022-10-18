@@ -20,7 +20,7 @@ public class RotatedHypeEllipsoid extends Formula {
         double resul = 0;
 
         for (int i = 1; i <= getDimension(); i++) {
-
+            p1 = 0;
             for (int j = 1; j <= i; j++) {
                 p1 += Math.pow(vector[j - 1], 2);
             }

@@ -110,22 +110,22 @@ public class BusquedaTabu {
             CosteMejorPeor = Double.POSITIVE_INFINITY;
 
             int x = (int)form.numAleatorio(4, 10);      //dinamico
-            for (int j = 1; j <= x; j++) {
-                for (int k = 0; k < SolActual.length; k++) {
+            for (int i = 1; i <= x; i++) {
+                for (int j = 0; j < SolActual.length; j++) {
                     double uniforme = form.numAleatorio(0, 1);
                     if (uniforme <= 0.3) { //Si aleatorio < 0.3
-                        cambiosVecino[k] = 1;
+                        cambiosVecino[j] = 1;
                         if (multiarranque == 1) {
                             //VNS caso 1
-                            inf = SolActual[k] * 0.9;
-                            sup = SolActual[k] * 1.1;
+                            inf = SolActual[j] * 0.9;
+                            sup = SolActual[j] * 1.1;
                             if (inf < rmin) {
                                 inf = rmin;
                             }
                             if (sup > rmax) {
                                 sup = rmax;
                             }
-                            vecino[k] = form.numAleatorio(inf, sup);
+                            vecino[j] = form.numAleatorio(inf, sup);
                         } else {
                             if (multiarranque == 2) {
                                 //VNS caso 2    
@@ -136,8 +136,8 @@ public class BusquedaTabu {
                             }
                         }
                     } else {
-                        vecino[k] = SolActual[k];
-                        cambiosVecino[k] = 0;
+                        vecino[j] = SolActual[j];
+                        cambiosVecino[j] = 0;
                     }
 
                 }
@@ -175,7 +175,7 @@ public class BusquedaTabu {
 
                     }
                 } else {
-                    j--;    // Hasta que no tengamos un vecindario completo(por si algunos salen tabu)
+                    //j--;    // Hasta que no tengamos un vecindario completo(por si algunos salen tabu)
                 }
 
             }

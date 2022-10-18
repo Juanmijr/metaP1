@@ -18,14 +18,13 @@ public class RastringinFunction extends Formula {
     public double ejecucion(double vector[]) {
         double p1 = 0;
 
-        double resul = 0;
 
         for (int i = 1; i <= getDimension(); i++) {
             p1 += ((Math.pow(vector[i - 1], 2)) - 10 * Math.cos(2 * Math.PI * vector[i - 1]));
         }
-        resul = 10 * getDimension() + p1;
+         
 
-        return resul;
+        return 10 * getDimension() + p1;
     }
 
 }

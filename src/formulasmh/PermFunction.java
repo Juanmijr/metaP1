@@ -17,13 +17,16 @@ public class PermFunction extends Formula {
     @Override
     public double ejecucion(double vector[]) {
         double resul = 0;
-        double b = 0.5;
+        double b = 10;
         for (int i = 1; i <= getDimension(); i++) {
             double p1 = 0;
             for (int j = 1; j < getDimension(); j++) {
                 // MIRAR LA BETA
                 double xj = vector[j];
-                p1 += (Math.pow(j,i)+ b) * (Math.pow(xj/j,i-1) );
+                double pr = j+b+1;
+                double se = Math.pow(xj,i+1);
+                double ter = (1/Math.pow(j+1, i+1));
+                p1 += (pr*(se-ter));
             }
             resul += Math.pow(p1,2);
         }
