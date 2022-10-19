@@ -45,6 +45,11 @@ public class BusquedaLocalK {
                         double inf, sup;
                         inf = solActual[j] * 0.9;
                         sup = solActual[j] * 1.1;
+                        if (solActual[j]<0){
+                            double aux = sup;
+                            sup = inf;
+                            inf = aux;
+                        }
                         if (inf < rangoMin) {
                             inf = rangoMin;
                         }
@@ -58,7 +63,7 @@ public class BusquedaLocalK {
 
                 }
                 double costeVecino = fi.ejecucion(solVecina);
-                if (Math.abs(costeVecino) < Math.abs(mejorVeci)) {
+                if ((costeVecino) < (mejorVeci)) {
                     mejorVeci = costeVecino;
                     mejorVecina = solVecina;
 
