@@ -23,7 +23,7 @@ public class PermFunction extends Formula {
             for (int j = 1; j < getDimension(); j++) {
                 // MIRAR LA BETA
                 double xj = vector[j];
-                double pr = j+b+1;
+                double pr = j+b;
                 double se = Math.pow(xj,i+1);
                 double ter = (1/Math.pow(j+1, i+1));
                 p1 += (pr*(se-ter));

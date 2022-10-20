@@ -17,7 +17,7 @@ public class MichalewiczFunction extends Formula {
     public double ejecucion(double vector[]) {
       double result = 0;
       for (int i =0; i<getDimension();i++){
-          result += Math.sin(vector[i])*Math.pow(Math.sin((i*Math.pow(vector[i],2))/Math.PI),2);
+          result += Math.sin(vector[i])*Math.pow(Math.sin((i*Math.pow(vector[i],2*10))/Math.PI),2);
       }
 
       return result*-1;

@@ -43,7 +43,8 @@ public class FormulasMH {
                                 vector, rangoMin, rangoMax, ac, sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, rangoMin, rangoMax, ac, sb);
-                       // System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, rangoMin, rangoMax, 5, ac, 10));
+                        //System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, rangoMin, rangoMax, 5, ac, 10));
+                        bt.BTabu(1000, vector, rangoMin, rangoMax, 5, ac, 10);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;

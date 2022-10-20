@@ -4,7 +4,10 @@
  */
 package formulasmh;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 /**
  *
@@ -12,7 +15,7 @@ import java.util.ArrayList;
  */
 public class BusquedaTabu {
 
-    void menosVisitados(double[][] mat, double[] nuevaSol, double rmin, double rmax, Formula form) {
+    static void menosVisitados(double[][] mat, double[] nuevaSol, double rmin, double rmax, Formula form) {
         int tam = nuevaSol.length;
         double menor;
         int pc = 0;
@@ -42,7 +45,7 @@ public class BusquedaTabu {
 
     }
 
-    void masVisitados(double[][] mat, double[] nuevaSol, double rmin, double rmax, Formula form) {
+    static void masVisitados(double[][] mat, double[] nuevaSol, double rmin, double rmax, Formula form) {
         int tam = nuevaSol.length;
         double mayor;
         int pc = 0;
@@ -72,10 +75,62 @@ public class BusquedaTabu {
 
     }
 
-    double BTabu(int iteraciones, double[] SolActual, double rmin, double rmax, int tamTabu, Formula form, int numRangos) {
+    static void imprimeMatriz(double[][] memFrec) {
+        for (int i = 0; i < memFrec.length; i++) {
+            for (int j = 0; j < memFrec.length; j++) {
+                System.out.print(memFrec[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
+    }
+    
+    static void imprimeVector(double[] vector){
+        for (int i = 0; i < vector.length; i++) {
+            
+            System.out.print(vector[i]+" ");
+        }
+    }
+    
+    static boolean comprobarTabu1(Queue<double[]> lTabu, double[] vecino){  
+        boolean iguales = false;
+        for (double[] elemento : lTabu){
+                    for (int j = 0; j<elemento.length;j++){
+                        double inf = 0;
+                        double sup = 0; 
+                        if (elemento[j]>0){
+                         inf = elemento[j] * 0.99;
+                         sup = elemento[j]*1.01;
+                        }
+                        else{
+                           inf = elemento[j] * 0.99;
+                           sup = elemento[j]*1.01;
+                        }
+                       if (vecino[j]<inf || vecino[j]>sup){
+                           iguales = true;
+                           break;
+                       }
+                    }
+                    if (iguales){
+                        break;
+                    }
+                }
+        return iguales;
+    }
+
+    
+    static boolean comprobarTabu2 (Queue<int[]> lTabu, int[] cambiosVecino){
+                for (int[] elemento : lTabu){
+                    if (Arrays.equals(cambiosVecino, elemento)){
+                        return true;
+                    }
+                }
+                return false;
+    }
+    
+    static double BTabu(int iteraciones, double[] SolActual, double rmin, double rmax, int tamTabu, Formula form, int numRangos) {
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
-        int OEMejoraI = 0, OEnoMejoraI = 0, OEMejoraD = 0, OEnoMejoraD = 0, osc = -1;
+        int OEMejoraI = 0, OEnoMejoraI = 0, OEMejoraD = 0, OEnoMejoraD = 0, osc = 0;
         double[][] memFrec = new double[SolActual.length][numRangos];
         //INICIALIZO MATRIZ A CEROS
         System.out.println("Tamaño filas: " + memFrec.length + " Tamaño COL: " + memFrec[1].length);
@@ -84,16 +139,17 @@ public class BusquedaTabu {
                 memFrec[i][j] = 0;
             }
         }
+        imprimeMatriz(memFrec);
 
         //CREO LISTA TABÚ COMPLETAS
-        ArrayList<double[]> lTabu = new ArrayList<double[]>();
-        ArrayList<int[]> lTabuMov = new ArrayList<int[]>();
+        Queue<double[]> lTabu = new LinkedList<double[]>();
+        Queue<int[]> lTabuMov = new LinkedList<int[]>();
         //VECTOR DE CAMBIOS DEL VECINO PARA AÑADIRLO A LA LISTA DE MOV
         int[] cambiosVecino = new int[SolActual.length];
+        int[] cambiosMejorVecino = new int [SolActual.length];
         lTabu.add(SolActual);
 
         double[] mejorPeores, SolGlobal = SolActual, nuevaSol = SolActual;
-        double inf, sup;
         int iter = 0;
         int contador = 0; //ESTANCAMIENTOS
         boolean mejora;
@@ -102,196 +158,74 @@ public class BusquedaTabu {
         double[] mejorVecino = new double[SolActual.length];
         double mejorCosteVecino = Double.POSITIVE_INFINITY;
 
-        int multiarranque = 1;
+        int multiarranque = 0;
 
         while (iter < iteraciones) {
-            iter++;     //cada nuevo movimiento a otro vecindario
-            mejora = false;
-            CosteMejorPeor = Double.POSITIVE_INFINITY;
+            iter++;
+            boolean noTabu = true;
+            double vecinos = form.numAleatorio(4, 10);
+            for (int i = 1; i <= vecinos; i++) {
+                //*********************************************************************************************************
+                for (int k = 0; k < SolActual.length; k++) {
+                    if (form.numAleatorio(0, 1) <= 0.3) { //Si aleatorio < 0.3
+                        cambiosVecino[k] = 1;
+                        if (multiarranque == 0) {
+//VNS caso 1
+                            double inf = SolActual[k] * 0.9;
+                            double sup = SolActual[k] * 1.1;
 
-            int x = (int)form.numAleatorio(4, 10);      //dinamico
-            for (int i = 1; i <= x; i++) {
-                for (int j = 0; j < SolActual.length; j++) {
-                    double uniforme = form.numAleatorio(0, 1);
-                    if (uniforme <= 0.3) { //Si aleatorio < 0.3
-                        cambiosVecino[j] = 1;
-                        if (multiarranque == 1) {
-                            //VNS caso 1
-                            inf = SolActual[j] * 0.9;
-                            sup = SolActual[j] * 1.1;
+                            if (SolActual[k] < 0) {
+                                double aux = sup;
+                                sup = inf;
+                                inf = aux;
+                                
+                            }
                             if (inf < rmin) {
                                 inf = rmin;
                             }
                             if (sup > rmax) {
                                 sup = rmax;
                             }
-                            vecino[j] = form.numAleatorio(inf, sup);
-                        } else {
-                            if (multiarranque == 2) {
-                                //VNS caso 2    
-                                // vecino[k] = Randfloat(rmin, rmax);   
+                                vecino[k] =form.numAleatorio(inf, sup) ;
                             } else {
-                                //VNS caso 3
-                                // vecino[k] = SolActual[k]*-1;
-                            }
+                                if (multiarranque == 1) {
+                                    //VNS caso 2    
+                                    vecino[k] = form.numAleatorio(rmin, rmax);
+                                } else {
+                                    //VNS caso 3
+                                    vecino[k] = SolActual[k] * -1;
+                                }
                         }
                     } else {
-                        vecino[j] = SolActual[j];
-                        cambiosVecino[j] = 0;
-                    }
-
-                }
-
-                //PRIMERA COMPROBACION TABU
-                //COMPROBAR AQUI si esta en lista Tabu
-                boolean tabu = false;
-
-                for (double[] it : lTabu) {
-                    int cont = 0;
-                    for (int k = 0; k < SolActual.length; k++) {
-                        inf = (it)[k] * 0.99;
-                        sup = (it)[k] * 1.01;
-
-                        if (vecino[k] < inf || vecino[k] > sup) {
-                            cont++;
-                            break;
-                        }
-                    }
-                    if (cont == 0) {
-                        tabu = true;
-                        break;
+                        vecino[k] = SolActual[k];
+                        cambiosVecino[k] = 0;
                     }
                 }
-
-                //SEGUNDA COMPROBACION TABU
-                //SI No es Tabu
-                if (!tabu) {
-                    //mejor vecino del VECINDARIO
+                //*********************************************************************************************************
+                boolean tabu = comprobarTabu1(lTabu, vecino);
+                
+                if (!tabu){
+                    tabu = comprobarTabu2(lTabuMov, cambiosVecino);
+                }
+                
+                if (!tabu){
+                    noTabu = false;
+                    
                     double costeVecino = form.ejecucion(vecino);
-
-                    if (costeVecino < mejorCosteVecino) {
+                    if(costeVecino<mejorCosteVecino ){
                         mejorVecino = vecino;
                         mejorCosteVecino = costeVecino;
-
+                        cambiosMejorVecino = cambiosVecino;
                     }
-                } else {
-                    //j--;    // Hasta que no tengamos un vecindario completo(por si algunos salen tabu)
+                    
                 }
-
+              
             }
-            //ACTUALIZO la memoria de frecuencias
-            //Por cada valor (dimension), del vector mejor Vecino obtenido
-            for (int i = 0; i < memFrec.length; i++) {
-                double ancho = (rmax - rmin + 1) / 10;
-                int posCol = 0; //columna con el rango donde actualizar la memoria
-                for (int j = (int)rmin; j < rmax; j += ancho) {
-                    if (mejorVecino[i] >= j && mejorVecino[i] < j + ancho) {
-                        memFrec[i][posCol]++;
-                        break;
-                    }
-                    posCol++;
-                }
-            }
-
-            //ACTUALIZO tabu la solucion completa(explicita) del vecino
-            lTabu.add(mejorVecino);
-            if (lTabu.size() > tamTabu) {
-                lTabu.remove(0);
-            }
-
-            SolActual = mejorVecino;
-
-            if (mejorCosteVecino < costeActual) { //el mejor del vecindario mejora al actual
-                costeActual = mejorCosteVecino;
-                mejora = true;
-                contador = 0;  //inicializamos el estancamiento
-
-                if (costeActual < CGlobal) {  //ademas actualizamos al Global y su coste
-                    CGlobal = costeActual;
-                    SolGlobal = SolActual;
-                }
-            } else {  // anotamos que es peor que la SolActual y un estancamiento mas
-                if (mejorCosteVecino < CosteMejorPeor) {
-                    CosteMejorPeor = mejorCosteVecino;
-                }
-
-                multiarranque = (multiarranque + 1) % 4;
-                if (multiarranque == 0) {
-                    multiarranque = 1;
-                }
-
-                contador++;
-            }
-
-            if (contador == 50) {
-                if (osc == 0) {
-                    if (CosteMejorMomento > costeActual) {
-                        CosteMejorMomento = costeActual;
-                        //cout << "La Oscilacion ha mejorado" << endl;
-                        OEMejoraD++;
-
-                    } else {
-                        //cout << "La Oscilacion NO ha mejorado" << endl;
-                        OEnoMejoraD++;
-                    }
-                } else {
-                    if (CosteMejorMomento > costeActual) {
-                        CosteMejorMomento = costeActual;
-                        //cout << "La Oscilacion ha mejorado" << endl;
-                        OEMejoraI++;
-
-                    } else {
-                        //cout << "La Oscilacion NO ha mejorado" << endl;
-                        OEnoMejoraI++;
-                    }
-                }
-
-                contador = 0;
-
-                int prob = (int)form.numAleatorio(1, 100);
-                //mostrarmatriz(memFrec);
-                if (prob <= 50) {
-                    osc = 0;
-                    menosVisitados(memFrec, nuevaSol, rmin, rmax,form);
-                } else {
-                    osc = 1;
-                    masVisitados(memFrec, nuevaSol, rmin, rmax,form);
-
-                }
-                System.out.println( "** Reinicializo **");
-
-                SolActual = nuevaSol;
-
-                double CosteActual = form.ejecucion(SolActual);  /// NUEVA Solucion
-
-                if (CosteActual < CGlobal) {   //Por si mejora al mejor Global
-                    CGlobal = CosteActual;
-                    SolGlobal = SolActual;
-                }
-                //Borramos la matriz de frecuencias 
-
-                for (int i = 0; i < memFrec.length; i++) {
-                    for (int j = 0; j < memFrec[i].length; j++) {
-                        memFrec[i][j] = 0;
-                    }
-                }
-
-                // Borramos la lista tabu                                
-                lTabu.clear();
-                //lTabu.resize(tenenciaTabu);  
-            }
-
-//        cout << endl <<"Paso = " << iter << endl;
-//        cout <<  "Coste Actual: " << costeActual << endl;
-//        cout <<  "Coste MejorPeor: " << CosteMejorPeor << endl;
-//        cout <<  "Coste Mejor Global: " << CGlobal << endl;
+            //************************************************************************
+        if (!noTabu){
+            
         }
-        System.out.println("MEJORAS-D: " + OEMejoraD + " NO MEJORAS-D: " + OEnoMejoraD);
-        System.out.println("MEJORAS-I: " + OEMejoraI + " NO MEJORAS-I: " + OEnoMejoraI );
-        SolActual = SolGlobal;
-
-//        cout << "Actual:";mostrarVector(SolActual);
-//        cout << "Global:";mostrarVector(SolGlobal);
+        }
         return CGlobal;
     }
 }
