@@ -1,4 +1,4 @@
-Rangos=-32768 32768 -1000 1000 -51.12 51.12 -5000 5000 -100 100 -65536 65536 -5 10 0 6.283185 -1000 1000 -100 100
+Rangos=-32768 32768 -1000 1000 0 6.283185 -100 100 -51.12 51.12 -5 10 -65536 65536 -5000 5000 -100 100 -1000 1000
 Semillas=50642691 06426915 64269150 42691506 26915064
 Funciones=AckleyFunction GriewankFunction MichakewiczFunction PermFunction RastringinFunction RosenbrockFunction RotatedHypeEllipsoid SchewefelFunction TridFunction DixonPriceFunction 
 Dimensión=10

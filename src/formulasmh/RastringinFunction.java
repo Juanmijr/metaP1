@@ -16,15 +16,18 @@ public class RastringinFunction extends Formula {
 
     @Override
     public double ejecucion(double vector[]) {
-        double p1 = 0;
+        double prod = 1;
+        double sum = 0;
 
 
-        for (int i = 1; i <= getDimension(); i++) {
-            p1 += ((Math.pow(vector[i - 1], 2)) - 10 * Math.cos(2 * Math.PI * vector[i - 1]));
+        for (int i = 0; i < getDimension(); i++) {
+            double x = vector[i];
+            sum += Math.pow(x, 2)/4000;
+            prod *= Math.cos(x/Math.sqrt(i+1));
         }
          
 
-        return 10 * getDimension() + p1;
+        return sum-prod+1;
     }
 
 }
