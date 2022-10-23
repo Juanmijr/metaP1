@@ -223,7 +223,7 @@ public class BusquedaTabu {
             }
             //************************************************************************
             if (!noTabu) {
-                double ancho = (form.getRangoMax() - form.getRangoMax() - 1) / 10;
+                double ancho = (form.getRangoMax() - form.getRangoMin() - 1) / 10;
                 for (int i = 0; i < memFrec.length; i++) {
                     double intervalo = Math.floor((mejorVecino[i] - (form.getRangoMin())) / ancho);
                     memFrec[i][(int) intervalo]++;

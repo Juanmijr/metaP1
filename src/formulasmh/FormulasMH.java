@@ -43,7 +43,7 @@ public class FormulasMH {
                                 vector, ac, sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, ac, sb);
-                        //System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, 5, ac, 10));
+                        System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, 5, ac, 10));
                         System.out.println("HE SUPERADO EL ACKLEY");
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
