@@ -83,7 +83,7 @@ public class BusquedaTabu {
         }
     }
 
-    static void imprimeVector(int[] vector) {
+    static void imprimeVector(double[] vector) {
         for (int i = 0; i < vector.length; i++) {
 
             System.out.print(vector[i] + " ");
@@ -218,7 +218,17 @@ public class BusquedaTabu {
                                 vecino[k] = form.numAleatorio(form.getRangoMin(), form.getRangoMax());
                             } else {
                                 //VNS caso 3
-                                vecino[k] = SolActual[k] * -1;
+                                if (form.getClass().getName() != "formulasmh.MichalewiczFunction") {
+                                    vecino[k] = SolActual[k] * -1;
+                                } else {
+                                    vecino[k] = 1 / SolActual[k];
+                                }
+                                if (vecino[k] < form.getRangoMin()) {
+                                    vecino[k] = form.getRangoMin();
+                                }
+                                if (vecino[k] > form.getRangoMax()) {
+                                    vecino[k] = form.getRangoMax();
+                                }
                             }
                         }
                     } else {
@@ -246,10 +256,9 @@ public class BusquedaTabu {
             }
             //************************************************************************
             if (!noTabu) {
-                double ancho = (form.getRangoMax() - form.getRangoMin()) / numRangos;
+                double ancho = (form.getRangoMax()+1 - (form.getRangoMin()-1)) / numRangos;
                 for (int i = 0; i < memFrec.length; i++) {
                     double intervalo = Math.floor((mejorVecino[i] - (form.getRangoMin())) / ancho);
-                    System.out.println("Intervalo: "+ intervalo + " con el mejorVecino: "+ mejorVecino[i]);
                     memFrec[i][(int) intervalo]++;
                 }
 
@@ -287,7 +296,7 @@ public class BusquedaTabu {
                         SolGlobal = SolActual;
                     }
                 }
-               
+
                 if (contador == 50) {
                     if (osc == 0) {
                         if (CosteMejorMomento > costeActual) {
@@ -311,7 +320,7 @@ public class BusquedaTabu {
                         }
                     }
                     contador = 0;
-                    double prob = form.numAleatorio(0,1);
+                    double prob = form.numAleatorio(0, 1);
                     System.out.println("Prob: " + prob);
                     if (prob <= 0.5) {
                         osc = 0;
@@ -323,7 +332,8 @@ public class BusquedaTabu {
 
                         masVisitados(memFrec, nuevaSol, form);
                     }
-
+                    imprimeVector(SolActual);
+                    imprimeVector(nuevaSol);
                     SolActual = nuevaSol;
 
                     costeActual = form.ejecucion(SolActual);

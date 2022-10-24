@@ -43,7 +43,7 @@ public class FormulasMH {
                                 vector, ac, sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, ac, sb);
-                         //bt.BTabu(1000, vector, 5, ac, 10,sb);
+                         bt.BTabu(1000, vector, 5, ac, 10,sb);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -61,6 +61,7 @@ public class FormulasMH {
                                 vector, gf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, gf,sb);
+                        System.out.println("GriewankFunction");
                         bt.BTabu(1000, vector, 5, gf, 10,sb);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
@@ -79,6 +80,8 @@ public class FormulasMH {
                                 vector, mf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, mf,sb);
+                                                System.out.println("MichakewiczFunction");
+
                                                 bt.BTabu(1000, vector, 5, mf, 10,sb);
 
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
@@ -97,6 +100,8 @@ public class FormulasMH {
                                 vector, pf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector,  pf,sb);
+                                                System.out.println("PermFunction");
+
                                                 bt.BTabu(1000, vector, 5, pf, 10,sb);
 
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
