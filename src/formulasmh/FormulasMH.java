@@ -43,9 +43,9 @@ public class FormulasMH {
                                 vector, ac, sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, ac, sb);
-                        System.out.println("RESULTADO ACKLEY TABÚ: " + bt.BTabu(1000, vector, 5, ac, 10));
-                        System.out.println("HE SUPERADO EL ACKLEY");
+                         //bt.BTabu(1000, vector, 5, ac, 10,sb);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
+
                     }
                     break;
                 case "GriewankFunction":
@@ -61,6 +61,7 @@ public class FormulasMH {
                                 vector, gf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, gf,sb);
+                        bt.BTabu(1000, vector, 5, gf, 10,sb);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -78,6 +79,8 @@ public class FormulasMH {
                                 vector, mf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, mf,sb);
+                                                bt.BTabu(1000, vector, 5, mf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
@@ -94,7 +97,8 @@ public class FormulasMH {
                                 vector, pf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector,  pf,sb);
-                        
+                                                bt.BTabu(1000, vector, 5, pf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
                     }
                     break;
@@ -111,6 +115,8 @@ public class FormulasMH {
                                 vector, rf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector,  rf,sb);
+                                                bt.BTabu(1000, vector, 5, rf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -128,6 +134,8 @@ public class FormulasMH {
                                 vector, rf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector,rf,sb);
+                                                bt.BTabu(1000, vector, 5, rf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -145,6 +153,8 @@ public class FormulasMH {
                                 vector, gf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, gf,sb);
+                                                bt.BTabu(1000, vector, 5, gf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -162,6 +172,8 @@ public class FormulasMH {
                                 vector, sf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, sf,sb);
+                                                bt.BTabu(1000, vector, 5, sf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -179,6 +191,8 @@ public class FormulasMH {
                                 vector, tf,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, tf,sb);
+                                                bt.BTabu(1000, vector, 5, tf, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -196,6 +210,8 @@ public class FormulasMH {
                                 vector,df,sb);
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, df,sb);
+                                                bt.BTabu(1000, vector, 5, df, 10,sb);
+
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }

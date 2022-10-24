@@ -36,9 +36,9 @@ public abstract class Formula {
         }
         return vector;
     }
-     
+
     public double numAleatorio(double vMin, double vMax){
-        return vMin + aleatorio.nextDouble()*(vMax-vMin+1);
+        return  aleatorio.nextDouble()*(vMax-vMin)+vMin;
     }
 
     public double getDimension() {

@@ -88,10 +88,20 @@ public class BusquedaTabu {
 
             System.out.print(vector[i] + " ");
         }
+        System.out.println("\n");
+    }
+
+    static void imprimeLista(Queue<double[]> lTabu) {
+        for (double[] elemento : lTabu) {
+            for (int j = 0; j < elemento.length; j++) {
+                System.out.print(elemento[j] + " ");
+            }
+        }
     }
 
     static boolean comprobarTabu1(Queue<double[]> lTabu, double[] vecino) {
         boolean iguales = true;
+
         for (double[] elemento : lTabu) {
             for (int j = 0; j < elemento.length; j++) {
                 double inf = 0;
@@ -108,7 +118,7 @@ public class BusquedaTabu {
                     break;
                 }
             }
-            if (iguales) {
+            if (!iguales) {
                 break;
             }
         }
@@ -118,6 +128,7 @@ public class BusquedaTabu {
     static boolean comprobarTabu2(Queue<int[]> lTabu, int[] cambiosVecino) {
 
         for (int[] elemento : lTabu) {
+
             if (Arrays.equals(cambiosVecino, elemento)) {
                 return true;
             }
@@ -125,7 +136,23 @@ public class BusquedaTabu {
         return false;
     }
 
-    double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos) {
+    static int[] copiaVector(int[] cambiosVecino) {
+        int[] nuevo = new int[cambiosVecino.length];
+        for (int i = 0; i < cambiosVecino.length; i++) {
+            nuevo[i] = cambiosVecino[i];
+        }
+        return nuevo;
+    }
+
+    static double[] copiaVectorDouble(double[] mejorVecino) {
+        double[] nuevo = new double[mejorVecino.length];
+        for (int i = 0; i < mejorVecino.length; i++) {
+            nuevo[i] = mejorVecino[i];
+        }
+        return nuevo;
+    }
+
+    double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb) {
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
         int OEMejoraI = 0, OEnoMejoraI = 0, OEMejoraD = 0, OEnoMejoraD = 0, osc = 0;
@@ -153,6 +180,7 @@ public class BusquedaTabu {
         double[] vecino = new double[SolActual.length];
         double[] mejorVecino = new double[SolActual.length];
         double mejorCosteVecino = Double.POSITIVE_INFINITY;
+        CosteMejorPeor = Double.POSITIVE_INFINITY;
 
         int multiarranque = 0;
 
@@ -160,8 +188,7 @@ public class BusquedaTabu {
             iter++;
             mejora = false;
             boolean noTabu = true;
-            CosteMejorPeor = Double.POSITIVE_INFINITY;
-            double vecinos = form.numAleatorio(4, 10);
+            double vecinos = Math.floor(form.numAleatorio(4, 10));
             for (int i = 1; i <= vecinos; i++) {
                 //*********************************************************************************************************
                 for (int k = 0; k < SolActual.length; k++) {
@@ -200,41 +227,38 @@ public class BusquedaTabu {
                     }
                 }
                 //*********************************************************************************************************
-                boolean tabu = comprobarTabu1(lTabu, vecino);
 
-                if (!tabu) {
-                    System.out.println("HA CUMPLIDO PRIMERA COMPROBACIÓN ");
+                if (comprobarTabu1(lTabu, vecino) == false) {
 
-                    tabu = comprobarTabu2(lTabuMov, cambiosVecino);
-                }
+                    if (comprobarTabu2(lTabuMov, cambiosVecino) == false) {
 
-                if (!tabu) {
-                    noTabu = false;
+                        noTabu = false;
 
-                    double costeVecino = form.ejecucion(vecino);
-                    if (costeVecino < mejorCosteVecino) {
-                        mejorVecino = vecino;
-                        mejorCosteVecino = costeVecino;
-                        cambiosMejorVecino = cambiosVecino;
+                        double costeVecino = form.ejecucion(vecino);
+                        if (costeVecino < mejorCosteVecino) {
+                            mejorVecino = vecino;
+                            mejorCosteVecino = costeVecino;
+                            cambiosMejorVecino = cambiosVecino;
+                        }
                     }
-
                 }
 
             }
             //************************************************************************
             if (!noTabu) {
-                double ancho = (form.getRangoMax() - form.getRangoMin() - 1) / 10;
+                double ancho = (form.getRangoMax() - form.getRangoMin()) / numRangos;
                 for (int i = 0; i < memFrec.length; i++) {
                     double intervalo = Math.floor((mejorVecino[i] - (form.getRangoMin())) / ancho);
+                    System.out.println("Intervalo: "+ intervalo + " con el mejorVecino: "+ mejorVecino[i]);
                     memFrec[i][(int) intervalo]++;
                 }
 
-                lTabu.add(mejorVecino);
+                lTabu.add(copiaVectorDouble(mejorVecino));
                 if (lTabu.size() > tamTabu) {
                     lTabu.remove();
                 }
 
-                lTabuMov.add(cambiosMejorVecino);
+                lTabuMov.add(copiaVector(cambiosMejorVecino));
                 if (lTabuMov.size() > tamTabu) {
                     lTabuMov.remove();
                 }
@@ -263,7 +287,7 @@ public class BusquedaTabu {
                         SolGlobal = SolActual;
                     }
                 }
-                System.out.println("Contador: " + contador);
+               
                 if (contador == 50) {
                     if (osc == 0) {
                         if (CosteMejorMomento > costeActual) {
@@ -287,7 +311,7 @@ public class BusquedaTabu {
                         }
                     }
                     contador = 0;
-                    double prob = form.numAleatorio(0, 1);
+                    double prob = form.numAleatorio(0,1);
                     System.out.println("Prob: " + prob);
                     if (prob <= 0.5) {
                         osc = 0;
@@ -320,15 +344,15 @@ public class BusquedaTabu {
                 }
 
             }
-
-            System.out.println("Paso = " + iter);
-            System.out.println("Coste Actual: " + costeActual);
-            System.out.println("Coste MejorPeor: "+ CosteMejorPeor);
-            System.out.println("Coste Mejor Global: "+ CGlobal);
+            sb.append("\n**************************************");
+            sb.append("\n Paso = " + iter);
+            sb.append("\nCoste Actual: " + costeActual);
+            sb.append("\nCoste MejorPeor: " + CosteMejorPeor);
+            sb.append("\nCoste Mejor Global: " + CGlobal);
 
         }
         SolActual = SolGlobal;
-
+        sb.append("\n MEJOR RESULTADO TABÚ: " + CGlobal);
         return CGlobal;
     }
 }

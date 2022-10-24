@@ -63,7 +63,7 @@ public class BusquedaLocalK {
 
                 }
                 double costeVecino = fi.ejecucion(solVecina);
-                if ((costeVecino) < (mejorVeci)) {
+                if (Math.abs(costeVecino) < Math.abs(mejorVeci)) {
                     mejorVeci = costeVecino;
                     mejorVecina = solVecina;
 
