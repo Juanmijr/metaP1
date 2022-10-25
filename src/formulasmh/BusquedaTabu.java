@@ -288,7 +288,7 @@ public class BusquedaTabu {
                     SolActual = copiaVectorDouble(mejorPeores);
                     contador++;
 
-                   // multiarranque = (multiarranque + 1) % 3;
+                    multiarranque = (multiarranque + 1) % 3;
                 } else {
                     contador = 0;
                     if (costeActual < CGlobal) {
