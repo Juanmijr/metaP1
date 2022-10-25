@@ -14,28 +14,26 @@ import java.util.Queue;
  */
 public class BusquedaTabu {
 
-    static void menosVisitados(double[][] mat, double[] nuevaSol, Formula form) {
+    static void menosVisitados(int[][] mat, int[][] matMarcaje, double[] nuevaSol, Formula form) {
+        System.out.println("EMPIEZO LA EJECUCIÓN: ");
         int tam = nuevaSol.length;
         double menor;
         int pc = 0;
-        int[] columnas = new int[3];
         for (int i = 0; i < tam; i++) {
             for (int k = 0; k < 3; k++) {
                 menor = Double.POSITIVE_INFINITY;
                 for (int j = 0; j < 10; j++) {
-                    if (mat[i][j] <= menor) {
+                    if (mat[i][j] <= menor && matMarcaje[i][j]==0) {
                         menor = mat[i][j];
                         pc = j;
                     }
                 }
-                columnas[k] = pc;
-                // ¿MAT[i][pc]=99999999999;?
+                matMarcaje[i][pc]=1;
                 //ALEATORIO ENTRE 0,2
                 int aleatorio = (int) form.numAleatorio(0, 2);
-                int col = columnas[aleatorio];
-                double ancho = form.getRangoMax() - form.getRangoMin() + 1;
+                double ancho = (form.getRangoMax() - form.getRangoMin() + 1)/10;
                 //MULTIPLICAR LA COLUMNA POR EL ANCHO
-                double ini = form.getRangoMin() + (col * ancho);
+                double ini = form.getRangoMin() + (pc * ancho);
                 double fin = ini + ancho;
 
                 nuevaSol[i] = form.numAleatorio(ini, fin);
@@ -44,7 +42,7 @@ public class BusquedaTabu {
 
     }
 
-    static void masVisitados(double[][] mat, double[] nuevaSol, Formula form) {
+    static void masVisitados(int [][] mat, int [][] matMarcaje, double[] nuevaSol, Formula form) {
         int tam = nuevaSol.length;
         double mayor;
         int pc = 0;
@@ -53,13 +51,13 @@ public class BusquedaTabu {
             for (int k = 0; k < 3; k++) {
                 mayor = 0;
                 for (int j = 0; j < 10; j++) {
-                    if (mat[i][j] >= mayor) {
+                    if (mat[i][j] >= mayor&& matMarcaje[i][j]==0) {
                         mayor = mat[i][j];
                         pc = j;
                     }
                 }
                 columnas[k] = pc;
-                // ¿MAT[i][pc]=99999999999;?
+                matMarcaje[i][pc]=1;
                 //ALEATORIO ENTRE 0,2
                 int aleatorio = (int) form.numAleatorio(0, 2);
                 int col = columnas[aleatorio];
@@ -156,11 +154,13 @@ public class BusquedaTabu {
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
         int OEMejoraI = 0, OEnoMejoraI = 0, OEMejoraD = 0, OEnoMejoraD = 0, osc = 0;
-        double[][] memFrec = new double[SolActual.length][numRangos];
+        int[][] memFrec = new int[SolActual.length][numRangos];
+        int[][] matMarcaje = new int [SolActual.length][numRangos];
         //INICIALIZO MATRIZ A CEROS
         for (int i = 0; i < memFrec.length; i++) {
             for (int j = 0; j < memFrec[i].length; j++) {
                 memFrec[i][j] = 0;
+                matMarcaje[i][j]= 0 ; 
             }
         }
 
@@ -246,9 +246,9 @@ public class BusquedaTabu {
 
                         double costeVecino = form.ejecucion(vecino);
                         if (costeVecino < mejorCosteVecino) {
-                            mejorVecino = vecino;
+                            mejorVecino = copiaVectorDouble(vecino);
                             mejorCosteVecino = costeVecino;
-                            cambiosMejorVecino = cambiosVecino;
+                            cambiosMejorVecino = copiaVector(cambiosVecino);
                         }
                     }
                 }
@@ -273,74 +273,75 @@ public class BusquedaTabu {
                 }
 
                 if (mejorCosteVecino < costeActual) {
-                    SolActual = mejorVecino;
+                    SolActual = copiaVectorDouble(mejorVecino);
                     costeActual = mejorCosteVecino;
                     mejora = true;
                 } else {
                     if (mejorCosteVecino < CosteMejorPeor) {
                         CosteMejorPeor = mejorCosteVecino;
-                        mejorPeores = SolActual;
+                        mejorPeores = copiaVectorDouble(SolActual);
                     }
                 }
 
                 if (!mejora) {
                     costeActual = CosteMejorPeor;
-                    SolActual = mejorPeores;
+                    SolActual = copiaVectorDouble(mejorPeores);
                     contador++;
 
-                    multiarranque = (multiarranque + 1) % 3;
+                   // multiarranque = (multiarranque + 1) % 3;
                 } else {
                     contador = 0;
                     if (costeActual < CGlobal) {
                         CGlobal = costeActual;
-                        SolGlobal = SolActual;
+                        SolGlobal = copiaVectorDouble(SolActual);
                     }
                 }
-
+                System.out.println("\n*******Contador: "+ contador +"  ****************\n" );
                 if (contador == 50) {
                     if (osc == 0) {
                         if (CosteMejorMomento > costeActual) {
                             CosteMejorMomento = costeActual;
-                            //cout << "La Oscilacion ha mejorado" << endl;
+                            System.out.println("La oscilación mejora");
                             OEMejoraD++;
 
                         } else {
-                            //cout << "La Oscilacion NO ha mejorado" << endl;
+                                                        System.out.println("La oscilación NO mejora");
+
                             OEnoMejoraD++;
                         }
                     } else {
                         if (CosteMejorMomento > costeActual) {
                             CosteMejorMomento = costeActual;
-                            //cout << "La Oscilacion ha mejorado" << endl;
+                            System.out.println("La oscilación mejora");
                             OEMejoraI++;
 
                         } else {
-                            //cout << "La Oscilacion NO ha mejorado" << endl;
+                            System.out.println("La oscilación NO mejora");
                             OEnoMejoraI++;
                         }
                     }
+                    
                     contador = 0;
-                    double prob = form.numAleatorio(0, 1);
+                    double prob = form.numAleatorio(0,1);
                     System.out.println("Prob: " + prob);
                     if (prob <= 0.5) {
                         osc = 0;
                         System.out.println("ESTOY AQUÍ EN MENOS VISITADOS");
-                        menosVisitados(memFrec, nuevaSol, form);
+                        menosVisitados(memFrec, matMarcaje, nuevaSol, form);
                     } else {
                         osc = 1;
-                        System.out.println("ESTOY AQUÍ EN MENOS VISITADOS");
+                        System.out.println("ESTOY AQUÍ EN MÁS VISITADOS");
 
-                        masVisitados(memFrec, nuevaSol, form);
+                        masVisitados(memFrec, matMarcaje, nuevaSol, form);
                     }
-                    imprimeVector(SolActual);
-                    imprimeVector(nuevaSol);
-                    SolActual = nuevaSol;
+
+                    SolActual = copiaVectorDouble(nuevaSol);
 
                     costeActual = form.ejecucion(SolActual);
 
                     if (costeActual < CGlobal) {   //Por si mejora al mejor Global
                         CGlobal = costeActual;
-                        SolGlobal = SolActual;
+                        SolGlobal = copiaVectorDouble(SolActual);
                     }
 
                     for (int i = 0; i < memFrec.length; i++) {
@@ -361,7 +362,10 @@ public class BusquedaTabu {
             sb.append("\nCoste Mejor Global: " + CGlobal);
 
         }
-        SolActual = SolGlobal;
+        System.out.println("MEJORAS-D: "+ OEMejoraD + " NO MEJORAS-D: "+ OEnoMejoraD);
+                System.out.println("MEJORAS-I: "+ OEMejoraI + " NO MEJORAS-I: "+ OEnoMejoraI);
+
+                SolActual = SolGlobal;
         sb.append("\n MEJOR RESULTADO TABÚ: " + CGlobal);
         return CGlobal;
     }
