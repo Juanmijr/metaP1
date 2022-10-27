@@ -25,6 +25,7 @@ public class FormulasMH {
         StringBuilder sb = null;
         double rangoMin = 0;
         double rangoMax = 0;
+        double[] prueba = new double[10];
         for (int i = 0; i < config.getFunciones().size(); i++) {
 
             switch (config.getFunciones().get(i)) {
@@ -37,6 +38,10 @@ public class FormulasMH {
                         
                         AckleyFunction ac = new AckleyFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(0), config.getRangos().get(1), config.getOptimos().get(0));
+                        for (int t = 0 ; t<10;t++){
+                            prueba[t]=0;
+                        }
+                        System.out.println("EJECUCIÓN ACKLEY"+ ac.ejecucion(prueba));
                         double vector[] = ac.vectorAleatorios();
                         sb.append("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         blk.busquedaMejor(config.getDimension(), false, 1000,
