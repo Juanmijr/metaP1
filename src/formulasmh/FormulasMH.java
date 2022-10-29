@@ -45,17 +45,17 @@ public class FormulasMH {
                         sb.append("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, ac, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, ac, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         bt.BTabu(1000, vector, 5, ac, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
                         vns.ejecucion(1000, vector, 5, ac, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -69,17 +69,17 @@ public class FormulasMH {
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, gf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, gf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, gf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, gf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -93,17 +93,17 @@ public class FormulasMH {
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000,
                                 vector, mf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000,
                                 vector, mf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, mf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         vns.ejecucion(1000, vector, 5, mf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -116,17 +116,17 @@ public class FormulasMH {
                         double vector[] = pf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, pf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, pf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, pf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, pf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -139,19 +139,19 @@ public class FormulasMH {
                         double vector[] = rf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, rf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, rf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
                         bt.BTabu(1000, vector, 5, rf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
                         vns.ejecucion(1000, vector, 5, rf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -165,21 +165,21 @@ public class FormulasMH {
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, rf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, rf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
                         bt.BTabu(1000, vector, 5, rf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, rf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -192,22 +192,22 @@ public class FormulasMH {
                         double vector[] = gf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, gf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
 
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, gf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
 
                         bt.BTabu(1000, vector, 5, gf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, gf, 10, sb, 0.5);
 
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -220,19 +220,19 @@ public class FormulasMH {
                         double vector[] = sf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, sf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, sf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, sf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, sf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -245,18 +245,18 @@ public class FormulasMH {
                         double vector[] = tf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, tf, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, tf, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, tf, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, tf, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
@@ -269,19 +269,19 @@ public class FormulasMH {
                         double vector[] = df.vectorAleatorios();
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), false, 1000, vector, df, sb);
-                        guardarArchivo("log/BL3/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
                         blk.busquedaMejor(config.getDimension(), true, 1000, vector, df, sb);
-                        guardarArchivo("log/BLK/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
                         bt.BTabu(1000, vector, 5, df, 10, sb, 0.5);
-                        guardarArchivo("log/BTABU/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
                         vns.ejecucion(1000, vector, 5, df, 10, sb, 0.5);
-                        guardarArchivo("log/VNS/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
+                        guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
                     break;
