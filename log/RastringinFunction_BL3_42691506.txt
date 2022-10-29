@@ -1,0 +1,13 @@
+
+Resultado RastringinFunction sin mejora: 9120.379240676897
+
+*** Empieza busquedaMejor del algoritmo: class formulasmh.RastringinFunction ***
+
+ITERACIÓN: 0 - 
+El mejor vecino pasa de ser: 9120.379240676897 a ser: 8860.630723267113
+
+*** SOLUCIÓN ACTUAL: ***
+-47.77983482483467 1.4939498304719834 40.90202799582102 -19.53797863526888 37.813827884133595 -39.010749487214646 -19.212934849792937 -10.787521399062463 17.280879784589963 31.009104873259922 
+
+Resultado mejora bl3: 8860.630723267113
+Duracion 33 microsegundos

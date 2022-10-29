@@ -1,0 +1,7 @@
+
+Resultado PermFunction: 3.514084923983588E45
+
+*** Empieza busquedaMejor del algoritmo: class formulasmh.PermFunction ***
+
+Resultado mejora blk: 3.514084923983588E45
+Duracion 236 microsegundos

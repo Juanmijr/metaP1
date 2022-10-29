@@ -1,0 +1,7 @@
+
+Resultado Schewefel: 2221.90692744477
+
+*** Empieza busquedaMejor del algoritmo: class formulasmh.SchewefelFunction ***
+
+Resultado mejora bl3: 2221.90692744477
+Duracion 10 microsegundos

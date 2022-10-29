@@ -25,6 +25,7 @@ public class BusquedaTabu {
 
     
     double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentaje) {
+        long tiempoinicial = System.nanoTime();
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
         int mejoraIntensif = 0, noMejoraIntensif = 0, mejoraDiverisf = 0, noMejoraDiversif = 0;
@@ -219,6 +220,8 @@ public class BusquedaTabu {
         sb.append("\n ************************ MEJOR RESULTADO TABÚ: " + CGlobal + " *******************************");
         sb.append("\n*** MEJOR SOLUCIÓN: ***\n");
         sb.append(imprimeVectorDouble(SolActual));
+        long tiempofin = System.nanoTime();
+        sb.append("Duracion " + (tiempofin - tiempoinicial)/1000+ " microsegundos\n");
         return CGlobal;
     }
 }
