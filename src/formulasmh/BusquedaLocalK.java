@@ -4,6 +4,7 @@
  */
 package formulasmh;
 
+import static formulasmh.Utils.imprimeVectorDouble;
 /**
  *
  * @author JuanMi
@@ -12,16 +13,10 @@ public class BusquedaLocalK {
 
     public BusquedaLocalK() {
     }
-    void imprimeSol (StringBuilder sb, double[] solActual){
-        sb.append("Impresión SOLACTUAL:");
-        for (int i = 0 ; i<solActual.length;i++){
-            sb.append(" Elemento "+(i+1+" : " + solActual[i]));
-        }
-    }
+   
 
     public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, Formula fi, StringBuilder sb) {
         sb.append("\n*** Empieza busquedaMejor del algoritmo: "+ fi.getClass()+ " ***\n");
-        imprimeSol(sb, solActual);
         long tiempoinicial = System.nanoTime();
         double[] solVecina = new double[tam];
         double[] mejorVecina = new double[tam];
@@ -74,7 +69,8 @@ public class BusquedaLocalK {
             if (Math.abs(mejorVeci) < Math.abs(mejorCoste)) {
                 sb.append("\nITERACIÓN: "+ it + " - \n");
                 sb.append("El mejor vecino pasa de ser: "+ mejorCoste + " a ser: "+mejorVeci+"\n");
-                imprimeSol(sb, solActual);
+                sb.append("\n*** SOLUCIÓN ACTUAL: ***\n");
+                sb.append(imprimeVectorDouble(solActual));
                 solActual = mejorVecina;
                 mejorCoste = mejorVeci;
                 mejora = true;

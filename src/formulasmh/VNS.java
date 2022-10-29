@@ -4,6 +4,8 @@
  */
 package formulasmh;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import static formulasmh.Utils.comprobarTabu1;
 import static formulasmh.Utils.comprobarTabu2;
 import static formulasmh.Utils.copiaVector;
@@ -14,17 +16,16 @@ import static formulasmh.Utils.imprimelTabuMov;
 import static formulasmh.Utils.imprimeVectorDouble;
 import static formulasmh.Utils.masVisitados;
 import static formulasmh.Utils.menosVisitados;
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  *
  * @author JuanMi
  */
-public class BusquedaTabu {
+public class VNS {
 
-    
-    double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentaje) {
+    public VNS() {
+    }
+
+    double ejecucion(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentaje) {
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
         int mejoraIntensif = 0, noMejoraIntensif = 0, mejoraDiverisf = 0, noMejoraDiversif = 0;
@@ -67,26 +68,45 @@ public class BusquedaTabu {
             for (int i = 1; i <= vecinos; i++) {
                 //*********************************************************************************************************
                 for (int k = 0; k < SolActual.length; k++) {
-                    if (form.numAleatorio(0, 1) <= 0.3) { //Si aleatorio < 0.3
+                    if (form.numAleatorio(0, 1) <= 0.3) {
                         cambiosVecino[k] = 1;
+                        if (multiarranque == 0) {
 //VNS caso 1
-                        double inf = SolActual[k] * 0.9;
-                        double sup = SolActual[k] * 1.1;
+                            double inf = SolActual[k] * 0.9;
+                            double sup = SolActual[k] * 1.1;
 
-                        if (SolActual[k] < 0) {
-                            double aux = sup;
-                            sup = inf;
-                            inf = aux;
+                            if (SolActual[k] < 0) {
+                                double aux = sup;
+                                sup = inf;
+                                inf = aux;
 
+                            }
+                            if (inf < form.getRangoMin()) {
+                                inf = form.getRangoMin();
+                            }
+                            if (sup > form.getRangoMax()) {
+                                sup = form.getRangoMax();
+                            }
+                            vecino[k] = form.numAleatorio(inf, sup);
+                        } else {
+                            if (multiarranque == 1) {
+                                //VNS caso 2    
+                                vecino[k] = form.numAleatorio(form.getRangoMin(), form.getRangoMax());
+                            } else {
+                                //VNS caso 3
+                                if (form.getClass().getName() != "formulasmh.MichalewiczFunction") {
+                                    vecino[k] = SolActual[k] * -1;
+                                } else {
+                                    vecino[k] = 1 / SolActual[k];
+                                }
+                                if (vecino[k] < form.getRangoMin()) {
+                                    vecino[k] = form.getRangoMin();
+                                }
+                                if (vecino[k] > form.getRangoMax()) {
+                                    vecino[k] = form.getRangoMax();
+                                }
+                            }
                         }
-                        if (inf < form.getRangoMin()) {
-                            inf = form.getRangoMin();
-                        }
-                        if (sup > form.getRangoMax()) {
-                            sup = form.getRangoMax();
-                        }
-                        vecino[k] = form.numAleatorio(inf, sup);
-
                     } else {
                         vecino[k] = SolActual[k];
                         cambiosVecino[k] = 0;
@@ -143,6 +163,7 @@ public class BusquedaTabu {
                     SolActual = copiaVectorDouble(mejorPeores);
                     contador++;
 
+                    multiarranque = (multiarranque + 1) % 3;
                 } else {
                     contador = 0;
                     if (costeActual < CGlobal) {
@@ -189,7 +210,7 @@ public class BusquedaTabu {
 
                     costeActual = form.ejecucion(SolActual);
 
-                    if (costeActual < CGlobal) {   //Por si mejora al mejor Global
+                    if (costeActual < CGlobal) {
                         CGlobal = costeActual;
                         SolGlobal = copiaVectorDouble(SolActual);
                     }
@@ -216,7 +237,7 @@ public class BusquedaTabu {
         sb.append("\nMEJORAS INTENSIFICANDO: " + mejoraIntensif + " NO MEJORAS INTENSIFICANDO: " + noMejoraIntensif);
 
         SolActual = SolGlobal;
-        sb.append("\n ************************ MEJOR RESULTADO TABÚ: " + CGlobal + " *******************************");
+        sb.append("\n************************ MEJOR RESULTADO TABÚ: " + CGlobal+ " *******************************");
         sb.append("\n*** MEJOR SOLUCIÓN: ***\n");
         sb.append(imprimeVectorDouble(SolActual));
         return CGlobal;
