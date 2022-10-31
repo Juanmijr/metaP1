@@ -1,7 +1,0 @@
-
-Resultado GriewankFunction2 sin mejora: -0.9078148429071539
-
-*** Empieza busquedaMejor del algoritmo: class formulasmh.MichalewiczFunction ***
-
-Resultado mejora bl3: -0.9078148429071539
-Duracion 15 microsegundos

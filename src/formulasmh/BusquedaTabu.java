@@ -14,6 +14,7 @@ import static formulasmh.Utils.imprimelTabuMov;
 import static formulasmh.Utils.imprimeVectorDouble;
 import static formulasmh.Utils.masVisitados;
 import static formulasmh.Utils.menosVisitados;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,8 +24,7 @@ import java.util.Queue;
  */
 public class BusquedaTabu {
 
-    
-    double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentaje) {
+    double BTabu(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentajeObs, double porceVecinos, double porRangoVeci) {
         long tiempoinicial = System.nanoTime();
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
@@ -37,6 +37,7 @@ public class BusquedaTabu {
             for (int j = 0; j < memFrec[i].length; j++) {
                 memFrec[i][j] = 0;
                 matMarcaje[i][j] = 0;
+
             }
         }
 
@@ -59,20 +60,21 @@ public class BusquedaTabu {
         CosteMejorPeor = Double.POSITIVE_INFINITY;
 
         int multiarranque = 0;
-
+        int[] anterior = new int[10];
         while (iter < iteraciones) {
             iter++;
+            mejorCosteVecino = Double.POSITIVE_INFINITY;
             mejora = false;
             boolean noTabu = true;
             double vecinos = Math.floor(form.numAleatorio(4, 10));
             for (int i = 1; i <= vecinos; i++) {
                 //*********************************************************************************************************
                 for (int k = 0; k < SolActual.length; k++) {
-                    if (form.numAleatorio(0, 1) <= 0.3) { //Si aleatorio < 0.3
+                    if (form.numAleatorio(0, 1) <= porceVecinos) { //Si aleatorio < 0.3
                         cambiosVecino[k] = 1;
 //VNS caso 1
-                        double inf = SolActual[k] * 0.9;
-                        double sup = SolActual[k] * 1.1;
+                        double inf = SolActual[k] * (1 - porRangoVeci);
+                        double sup = SolActual[k] * (1 + porRangoVeci);
 
                         if (SolActual[k] < 0) {
                             double aux = sup;
@@ -97,10 +99,10 @@ public class BusquedaTabu {
                 if (comprobarTabu1(lTabu, vecino) == false) {
 
                     if (comprobarTabu2(lTabuMov, cambiosVecino) == false) {
+                        noTabu = false;
 
                         double costeVecino = form.ejecucion(vecino);
                         if (costeVecino < mejorCosteVecino) {
-                            noTabu = false;
                             mejorVecino = copiaVectorDouble(vecino);
                             mejorCosteVecino = costeVecino;
                             cambiosMejorVecino = copiaVector(cambiosVecino);
@@ -117,7 +119,6 @@ public class BusquedaTabu {
                     memFrec[i][(int) intervalo]++;
                 }
                 sb.append(imprimeVector(cambiosMejorVecino));
-                sb.append(imprimelTabuMov(lTabuMov));
                 lTabu.add(copiaVectorDouble(mejorVecino));
                 if (lTabu.size() > tamTabu) {
                     lTabu.remove();
@@ -127,6 +128,10 @@ public class BusquedaTabu {
                 if (lTabuMov.size() > tamTabu) {
                     lTabuMov.remove();
                 }
+
+                sb.append(imprimelTabuMov(lTabuMov));
+
+                anterior = copiaVector(cambiosVecino);
                 if (mejorCosteVecino < costeActual) {
                     sb.append("EL MEJOR VECINO:" + mejorCosteVecino + " MEJORA LA SOLACTUAL: " + costeActual + "\n");
                     SolActual = copiaVectorDouble(mejorVecino);
@@ -177,7 +182,7 @@ public class BusquedaTabu {
 
                     contador = 0;
                     double prob = form.numAleatorio(0, 1);
-                    if (prob <= porcentaje) {
+                    if (prob <= porcentajeObs) {
                         oscilacion = false;
                         menosVisitados(memFrec, matMarcaje, nuevaSol, form);
                     } else {
@@ -221,7 +226,7 @@ public class BusquedaTabu {
         sb.append("\n*** MEJOR SOLUCIÓN: ***\n");
         sb.append(imprimeVectorDouble(SolActual));
         long tiempofin = System.nanoTime();
-        sb.append("Duracion " + (tiempofin - tiempoinicial)/1000+ " microsegundos\n");
+        sb.append("Duracion " + (tiempofin - tiempoinicial) / 1000 + " microsegundos\n");
         return CGlobal;
     }
 }

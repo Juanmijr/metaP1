@@ -1,7 +1,0 @@
-
-Resultado DixonPrice: 1.4522084204914444E10
-
-*** Empieza busquedaMejor del algoritmo: class formulasmh.DixonPriceFunction ***
-
-Resultado mejora blk: 1.4522084204914444E10
-Duracion 24 microsegundos

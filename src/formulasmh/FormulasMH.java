@@ -26,7 +26,12 @@ public class FormulasMH {
         StringBuilder sb = null;
         double rangoMin = 0;
         double rangoMax = 0;
-        double[] prueba = new double[10];
+        int iteraciones = config.getIteraciones();
+        int numRangos = config.getNumRangos();
+        double porcentajeObstencionVecinos = config.getPorcentajeObstencionVecinos();
+        double porcentajeRangoVecinos = config.getPorcentajeRangoVecinos();
+        double porcentajeObscilacion = config.getPorcentajeObscilacion();
+        int tamTabu = config.getTamTabu();
         for (int i = 0; i < config.getFunciones().size(); i++) {
 
             switch (config.getFunciones().get(i)) {
@@ -38,23 +43,18 @@ public class FormulasMH {
 
                         AckleyFunction ac = new AckleyFunction(config.getSemillas().get(k), config.getDimension(),
                                 config.getRangos().get(0), config.getRangos().get(1), config.getOptimos().get(0));
-                        for (int t = 0; t < 10; t++) {
-                            prueba[t] = 0;
-                        }
                         double vector[] = ac.vectorAleatorios();
                         sb.append("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
-                        blk.busquedaMejor(config.getDimension(), false, 1000,
-                                vector, ac, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones,vector, ac, sb, porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
-                        blk.busquedaMejor(config.getDimension(), true, 1000,
-                                vector, ac, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones,vector, ac, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
-                        bt.BTabu(1000, vector, 5, ac, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, ac, numRangos, sb, porcentajeObscilacion, porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado Ackley sin mejora: " + ac.ejecucion(vector) + "\n");
-                        vns.ejecucion(1000, vector, 5, ac, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, ac,numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -67,18 +67,16 @@ public class FormulasMH {
                                 rangoMin, rangoMax, config.getOptimos().get(1));
                         double vector[] = gf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000,
-                                vector, gf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones,vector, gf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000,
-                                vector, gf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones,vector, gf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, gf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, gf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction sin mejora: " + gf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, gf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, gf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -91,18 +89,16 @@ public class FormulasMH {
                                 config.getRangos().get(4), config.getRangos().get(5), config.getOptimos().get(2));
                         double vector[] = mf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000,
-                                vector, mf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones,vector, mf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000,
-                                vector, mf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones,vector, mf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado GriewankFunction2 sin mejora: " + mf.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, mf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, mf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
-                        vns.ejecucion(1000, vector, 5, mf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, mf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -115,17 +111,17 @@ public class FormulasMH {
                                 config.getRangos().get(6), config.getRangos().get(7), config.getOptimos().get(2));
                         double vector[] = pf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, pf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, pf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, pf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, pf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, pf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, pf, numRangos, sb,porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado PermFunction: " + pf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, pf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, pf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -138,19 +134,19 @@ public class FormulasMH {
                                 rangoMin, rangoMax, config.getOptimos().get(3));
                         double vector[] = rf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, rf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, rf, sb, porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, rf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, rf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
-                        bt.BTabu(1000, vector, 5, rf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, rf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado RastringinFunction sin mejora: " + rf.ejecucion(vector) + '\n');
 
-                        vns.ejecucion(1000, vector, 5, rf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, rf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -164,21 +160,21 @@ public class FormulasMH {
                         double vector[] = rf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, rf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, rf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, rf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, rf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
 
-                        bt.BTabu(1000, vector, 5, rf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, rf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RosenbrockFunction: " + rf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, rf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, rf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -191,21 +187,21 @@ public class FormulasMH {
                                 config.getRangos().get(12), config.getRangos().get(13), config.getOptimos().get(5));
                         double vector[] = gf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, gf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, gf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
 
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, gf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, gf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
 
-                        bt.BTabu(1000, vector, 5, gf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, gf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado RotatedHypeEllipsoid: " + gf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, gf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, gf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
 
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
@@ -219,19 +215,19 @@ public class FormulasMH {
                                 config.getRangos().get(14), config.getRangos().get(15), config.getOptimos().get(6));
                         double vector[] = sf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, sf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, sf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, sf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, sf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, sf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, sf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado Schewefel: " + sf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, sf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, sf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -244,18 +240,18 @@ public class FormulasMH {
                                 rangoMin, rangoMax, config.getOptimos().get(7));
                         double vector[] = tf.vectorAleatorios();
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, tf, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, tf, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, tf, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, tf, sb, porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, tf, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, tf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado TridFunction: " + tf.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, tf, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, tf, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }
@@ -268,19 +264,19 @@ public class FormulasMH {
                                 rangoMin, rangoMax, config.getOptimos().get(8));
                         double vector[] = df.vectorAleatorios();
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), false, 1000, vector, df, sb);
+                        blk.busquedaMejor(config.getDimension(), false, iteraciones, vector, df, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BL3_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
-                        blk.busquedaMejor(config.getDimension(), true, 1000, vector, df, sb);
+                        blk.busquedaMejor(config.getDimension(), true, iteraciones, vector, df, sb,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BLK_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
-                        bt.BTabu(1000, vector, 5, df, 10, sb, 0.5);
+                        bt.BTabu(iteraciones, vector, tamTabu, df, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_BTABU_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                         sb = new StringBuilder("\nResultado DixonPrice: " + df.ejecucion(vector) + '\n');
-                        vns.ejecucion(1000, vector, 5, df, 10, sb, 0.5);
+                        vns.ejecucion(iteraciones, vector, tamTabu, df, numRangos, sb, porcentajeObscilacion,porcentajeObstencionVecinos, porcentajeRangoVecinos);
                         guardarArchivo("log/" + config.getFunciones().get(i) + "_VNS_" + config.getSemillas().get(k) + ".txt", sb.toString());
 
                     }

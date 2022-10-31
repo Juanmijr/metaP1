@@ -25,7 +25,7 @@ public class VNS {
     public VNS() {
     }
 
-    double ejecucion(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentaje) {
+    double ejecucion(int iteraciones, double[] SolActual, int tamTabu, Formula form, int numRangos, StringBuilder sb, double porcentajeObs, double porceVecinos, double porRangoVeci) {
         long tiempoinicial = System.nanoTime();
         double costeActual = form.ejecucion(SolActual);
         double CosteMejorPeor, CGlobal = costeActual, CosteMejorMomento = Double.POSITIVE_INFINITY;
@@ -69,12 +69,12 @@ public class VNS {
             for (int i = 1; i <= vecinos; i++) {
                 //*********************************************************************************************************
                 for (int k = 0; k < SolActual.length; k++) {
-                    if (form.numAleatorio(0, 1) <= 0.3) {
+                    if (form.numAleatorio(0, 1) <= porceVecinos) {
                         cambiosVecino[k] = 1;
                         if (multiarranque == 0) {
 //VNS caso 1
-                            double inf = SolActual[k] * 0.9;
-                            double sup = SolActual[k] * 1.1;
+                            double inf = SolActual[k] * (1-porRangoVeci);
+                            double sup = SolActual[k] * (1+porRangoVeci);
 
                             if (SolActual[k] < 0) {
                                 double aux = sup;
@@ -198,7 +198,7 @@ public class VNS {
 
                     contador = 0;
                     double prob = form.numAleatorio(0, 1);
-                    if (prob <= porcentaje) {
+                    if (prob <= porcentajeObs) {
                         oscilacion = false;
                         menosVisitados(memFrec, matMarcaje, nuevaSol, form);
                     } else {

@@ -19,7 +19,13 @@ public class Configurador {
     ArrayList<Long> semillas;
     ArrayList<Double> rangos;
     ArrayList<Double> optimos;
+    double porcentajeObscilacion;
+    double porcentajeRangoVecinos;
+    double porcentajeObstencionVecinos;
+    int iteraciones;
+    int numRangos;
     int dimension;
+    int tamTabu;
 
     public Configurador(String ruta) {
         funciones = new ArrayList<>();
@@ -48,7 +54,7 @@ public class Configurador {
                         }
                         break;
                     case "Funciones":
-                        String[] vFunciones= split[1].split(" ");
+                        String[] vFunciones = split[1].split(" ");
                         for (int i = 0; i < vFunciones.length; i++) {
                             funciones.add(vFunciones[i]);
                         }
@@ -57,10 +63,31 @@ public class Configurador {
                         dimension = Integer.parseInt(split[1]);
                         break;
                     case "Óptimos":
-                         String[] vOptimo = split[1].split(" ");
+                        String[] vOptimo = split[1].split(" ");
                         for (int i = 0; i < vOptimo.length; i++) {
                             optimos.add(Double.parseDouble(vOptimo[i]));
                         }
+                        break;
+                    case "PorcentajeObscilación":
+                        porcentajeObscilacion = Double.parseDouble(split[1]);
+                        break;
+                    case "PorcentajeObstenciónVecinos":
+                        porcentajeObstencionVecinos = Double.parseDouble(split[1]);
+
+                        break;
+                    case "PorcentajeRangosVecinos":
+                        porcentajeRangoVecinos = Double.parseDouble(split[1]);
+
+                        break;
+                    case "Iteraciones":
+                        iteraciones = Integer.parseInt(split[1]);
+                        break;
+                    case "NúmeroRangos":
+                        numRangos = Integer.parseInt(split[1]);
+
+                        break;
+                    case "TamañoTabú":
+                        tamTabu = Integer.parseInt(split[1]);
                         break;
                 }
             }
@@ -69,8 +96,6 @@ public class Configurador {
             System.out.println(e);
         }
     }
-
- 
 
     public ArrayList<String> getFunciones() {
         return funciones;
@@ -91,7 +116,29 @@ public class Configurador {
     public ArrayList<Double> getOptimos() {
         return optimos;
     }
-    
-    
-    
+
+    public double getPorcentajeObscilacion() {
+        return porcentajeObscilacion;
+    }
+
+    public double getPorcentajeRangoVecinos() {
+        return porcentajeRangoVecinos;
+    }
+
+    public double getPorcentajeObstencionVecinos() {
+        return porcentajeObstencionVecinos;
+    }
+
+    public int getIteraciones() {
+        return iteraciones;
+    }
+
+    public int getNumRangos() {
+        return numRangos;
+    }
+
+    public int getTamTabu() {
+        return tamTabu;
+    }
+
 }

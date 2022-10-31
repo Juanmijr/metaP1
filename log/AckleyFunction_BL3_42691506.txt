@@ -1,7 +1,0 @@
-
-Resultado Ackley sin mejora: 21.406166752668245
-
-*** Empieza busquedaMejor del algoritmo: class formulasmh.AckleyFunction ***
-
-Resultado mejora bl3: 21.406166752668245
-Duracion 24 microsegundos

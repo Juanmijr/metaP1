@@ -15,7 +15,7 @@ public class BusquedaLocalK {
     }
    
 
-    public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, Formula fi, StringBuilder sb) {
+    public double busquedaMejor(int tam, boolean evalK, double evaluaciones, double[] solActual, Formula fi, StringBuilder sb,double porceVecinos, double porRangoVeci) {
         sb.append("\n*** Empieza busquedaMejor del algoritmo: "+ fi.getClass()+ " ***\n");
         long tiempoinicial = System.nanoTime();
         double[] solVecina = new double[tam];
@@ -36,10 +36,10 @@ public class BusquedaLocalK {
             for (int i = 1; i < numVecinos; i++) {
                 for (int j = 0; j < tam; j++) {
 
-                    if (fi.numAleatorio(0, 1) <= 0.3) {
+                    if (fi.numAleatorio(0, 1) <= porceVecinos) {
                         double inf, sup;
-                        inf = solActual[j] * 0.9;
-                        sup = solActual[j] * 1.1;
+                        inf = solActual[j] * (1-porRangoVeci);
+                        sup = solActual[j] * (1+porRangoVeci);
                         if (solActual[j]<0){
                             double aux = sup;
                             sup = inf;
